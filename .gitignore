@@ -1,0 +1,5 @@
+.vscode/
+.history/
+Xmake-Cube/.xmake/
+Xmake-Cube/build/
+Xmake-Cube/compile_commands.json
