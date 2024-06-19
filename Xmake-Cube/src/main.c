@@ -20,7 +20,7 @@ enum {
   GREEN = 32
 };
 
-double rotationX, rotationY, rotationZ;
+double rotAngleX, rotAngleY, rotAngleZ;
 wchar_t screenBuffer[SCREENSIZE];
 double depthBuffer[SCREENSIZE];
 
@@ -35,9 +35,9 @@ The transformation can be applied in two ways:
 Both methods will yield the same result.
 
 Let:
-A = rotationX
-B = rotationY
-C = rotationZ
+A = rotAngleX
+B = rotAngleY
+C = rotAngleZ
 
 R_x(A) = [ 1, 0,      0       ]
          [ 0, cos(A), -sin(A) ]
@@ -101,37 +101,37 @@ x*sin(B) + cos(B)*(z*cos(A) - y*sin(A))
 
 #ifdef USE_COMBINED_ROTATION
 double rotateX(double x, double y, double z) {
-  return x * cos(rotationY) * cos(rotationZ) +
-         y * (sin(rotationX) * sin(rotationY) * cos(rotationZ) + cos(rotationX) * sin(rotationZ)) +
-         z * (sin(rotationX) * sin(rotationZ) - cos(rotationX) * sin(rotationY) * cos(rotationZ));
+  return x * cos(rotAngleY) * cos(rotAngleZ) +
+         y * (sin(rotAngleX) * sin(rotAngleY) * cos(rotAngleZ) + cos(rotAngleX) * sin(rotAngleZ)) +
+         z * (sin(rotAngleX) * sin(rotAngleZ) - cos(rotAngleX) * sin(rotAngleY) * cos(rotAngleZ));
   ;
 }
 
 double rotateY(double x, double y, double z) {
-  return -x * cos(rotationY) * sin(rotationZ) +
-         y * (cos(rotationX) * cos(rotationZ) - sin(rotationX) * sin(rotationY) * sin(rotationZ)) +
-         z * (cos(rotationX) * sin(rotationY) * sin(rotationZ) + sin(rotationX) * cos(rotationZ));
+  return -x * cos(rotAngleY) * sin(rotAngleZ) +
+         y * (cos(rotAngleX) * cos(rotAngleZ) - sin(rotAngleX) * sin(rotAngleY) * sin(rotAngleZ)) +
+         z * (cos(rotAngleX) * sin(rotAngleY) * sin(rotAngleZ) + sin(rotAngleX) * cos(rotAngleZ));
 }
 
 double rotateZ(double x, double y, double z) {
-  return x * sin(rotationY) - y * sin(rotationX) * cos(rotationY) +
-         z * cos(rotationX) * cos(rotationY);
+  return x * sin(rotAngleY) - y * sin(rotAngleX) * cos(rotAngleY) +
+         z * cos(rotAngleX) * cos(rotAngleY);
 }
 #else
 double rotateX(double x, double y, double z) {
-  return cos(rotationZ) *
-             (x * cos(rotationY) - sin(rotationY) * (z * cos(rotationX) - y * sin(rotationX))) +
-         sin(rotationZ) * (y * cos(rotationX) + z * sin(rotationX));
+  return cos(rotAngleZ) *
+             (x * cos(rotAngleY) - sin(rotAngleY) * (z * cos(rotAngleX) - y * sin(rotAngleX))) +
+         sin(rotAngleZ) * (y * cos(rotAngleX) + z * sin(rotAngleX));
 }
 
 double rotateY(double x, double y, double z) {
-  return cos(rotationZ) * (y * cos(rotationX) + z * sin(rotationX)) -
-         sin(rotationZ) *
-             (x * cos(rotationY) - sin(rotationY) * (z * cos(rotationX) - y * sin(rotationX)));
+  return cos(rotAngleZ) * (y * cos(rotAngleX) + z * sin(rotAngleX)) -
+         sin(rotAngleZ) *
+             (x * cos(rotAngleY) - sin(rotAngleY) * (z * cos(rotAngleX) - y * sin(rotAngleX)));
 }
 
 double rotateZ(double x, double y, double z) {
-  return x * sin(rotationY) + cos(rotationY) * (z * cos(rotationX) - y * sin(rotationX));
+  return x * sin(rotAngleY) + cos(rotAngleY) * (z * cos(rotAngleX) - y * sin(rotAngleX));
 }
 #endif
 
@@ -275,9 +275,9 @@ void print_screen_char() {
     const int y = k / SCREENWIDTH;
     drawCharacter(x, y, isNotEndOfRow(k) ? screenBuffer[k] : '\n', GREEN);
   }
-  rotationX += 0.05;
-  rotationY += 0.05;
-  rotationZ += 0.01;
+  rotAngleX += 0.05;
+  rotAngleY += 0.05;
+  rotAngleZ += 0.01;
 }
 
 void print_screen_line() {
@@ -290,9 +290,9 @@ void print_screen_line() {
     //  Move cursor to the beginning of the next line
     wprintf(L"\033[E");
   }
-  rotationX += 0.0015;
-  rotationY += 0.0015;
-  rotationZ += 0.0001;
+  rotAngleX += 0.0015;
+  rotAngleY += 0.0015;
+  rotAngleZ += 0.0001;
 }
 
 int main() {
