@@ -1,4 +1,5 @@
 import { Cube } from './cube.js'
+import { CanvasMode } from './canvasMode.js'
 
 window.ctx = canvas.getContext('2d')
 window.SCREENWIDTH = canvas.width
@@ -8,7 +9,7 @@ window.CENTERX = SCREENWIDTH / 2
 window.CENTERY = SCREENHEIGHT / 2
 
 async function drawCube () {
-  ctx.clearRect(0, 0, SCREENWIDTH, SCREENHEIGHT)
+  CanvasMode.clearCanvas()
 
   await normalCube.transformAndProjectCube(false)
   // await noZeroVector.transformAndProjectCube(false)
@@ -203,4 +204,5 @@ async function animate (timestamp) {
   // await drawCube()
 }
 
+CanvasMode.initialize(true, true)
 animate()

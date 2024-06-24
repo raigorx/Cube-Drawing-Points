@@ -7,13 +7,23 @@
     <style>
       canvas {
         background: #000;
-        display: block;
+        display: none;
+        margin: 0 auto;
+      }
+      #svgAsCanvas {
+        display: none;
         margin: 0 auto;
       }
     </style>
   </head>
   <body>
     <canvas id="canvas" width="1400" height="800"></canvas>
+    <svg
+      id="svgAsCanvas"
+      width="1400"
+      height="800"
+      style="background-color: #000"
+    ></svg>
     <script type="module" src="main.js"></script>
   </body>
 </html>
