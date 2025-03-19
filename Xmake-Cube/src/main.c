@@ -190,9 +190,15 @@ void transformAndProjectPoint(int cubeX, int cubeY, int cubeZ, wchar_t ch) {
   Decimal: 0.5
 
   When you multiply a number by a decimal, you are taking a fraction of that number.
+  The reciprocal of a number is 1 divided by that number.
+  In other words, if the number is x, its reciprocal is 1/x.
+  Using the rules of multiplication and division: x * 1/x = x/x = 1
   Multiplying by a decimal is equivalent to dividing by the reciprocal of that decimal.
+  a * x = a / (1/x)
+  The reciprocal of 0.5 is 1/0.5
+  1/0.5 = 2
   10 * 0.5 = 5
-  10/2 = 5
+  10/2 = 5 which is the same as 10 / (1/0.5) = 5
   Both operations give the same result.
   Thus, multiplying by a decimal is the same as dividing
   When you multiply by a decimal, you are scaling down the number.
